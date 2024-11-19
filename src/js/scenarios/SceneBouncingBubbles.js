@@ -138,6 +138,6 @@ export default class SceneBouncingBubbles extends Scene2D {
     }
 
     onDeviceOrientation() {
-        this.debug.domDebug = "coucou"
+        this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
     }
 }
