@@ -13,3 +13,12 @@ export function distance2D(x1, y1, x2, y2) {
     const dy_ = y2 - y1
     return Math.sqrt(dx_ * dx_ + dy_ * dy_)
 }
+
+export const clamp = (value, min, max) => {
+    if (min > max) {
+        const min_ = min
+        min = max
+        max = min_
+    }
+    return Math.min(Math.max(min, value), max)
+}

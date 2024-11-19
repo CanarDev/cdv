@@ -1,6 +1,6 @@
 import GlobalContext from "../GlobalContext"
 import Scene2D from "../Scene2D"
-import { degToRad, distance2D, randomRange } from "../Utils/MathUtils"
+import {clamp, degToRad, distance2D, randomRange} from "../Utils/MathUtils"
 
 class Bubble {
     constructor(context, x, y, radius) {
@@ -144,10 +144,17 @@ export default class SceneBouncingBubbles extends Scene2D {
 
     onDeviceOrientation() {
 
+
+        let gx_ = this.orientation.gamma / 90
+        let gy_ = this.orientation.beta / 90
+
+        gx_ = clamp(gx_, -1, 1)
+        gy_ = clamp(gy_, -1, 1)
+
         if (!!this.bubbles) {
             this.bubbles.forEach(b => {
-                b.gx = this.orientation.beta
-                b.gy = this.orientation.gamma
+                b.gx = gx_ * this.params.speed
+                b.gy = gy_ * this.params.speed
             })
         }
         this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
