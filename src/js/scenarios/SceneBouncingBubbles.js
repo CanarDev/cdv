@@ -145,8 +145,8 @@ export default class SceneBouncingBubbles extends Scene2D {
     onDeviceOrientation() {
 
 
-        let gx_ = this.orientation.gamma / 90
-        let gy_ = this.orientation.beta / 90
+        let gx_ = this.orientation.gamma / -90
+        let gy_ = this.orientation.beta / -90
 
         gx_ = clamp(gx_, -1, 1)
         gy_ = clamp(gy_, -1, 1)
