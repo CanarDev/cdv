@@ -153,8 +153,8 @@ export default class SceneBouncingBubbles extends Scene2D {
 
         if (!!this.bubbles) {
             this.bubbles.forEach(b => {
-                // b.gx = gx_ * this.params.speed
-                // b.gy = gy_ * this.params.speed
+                b.gx = gx_ * this.params.speed
+                b.gy = gy_ * this.params.speed
             })
         }
         this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
