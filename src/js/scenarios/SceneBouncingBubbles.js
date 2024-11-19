@@ -30,8 +30,8 @@ class Bubble {
     }
 
     update(width, height) {
-        this.x += (this.vx + this.gx) * this.time.delta / 1000 - this.gx
-        this.y += (this.vy + this.gy) * this.time.delta / 1000 + this.gy
+        this.x += (this.vx + this.gx) * this.time.delta / 1000
+        this.y += (this.vy + this.gy) * this.time.delta / 1000
 
         /** bounce */
         // if (this.x < 0 || this.x > width) this.vx *= -1
