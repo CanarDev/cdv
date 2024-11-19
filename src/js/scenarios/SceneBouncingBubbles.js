@@ -54,7 +54,8 @@ export default class SceneBouncingBubbles extends Scene2D {
             speed: 1, // positif ou negatif
             threshold: 50,
             radius: 5,
-            nBubbles: 10
+            nBubbles: 10,
+            gStrength: 100
         }
         if (!!this.debugFolder) {
             this.debugFolder.add(this.params, "threshold", 0, 200)
@@ -66,6 +67,14 @@ export default class SceneBouncingBubbles extends Scene2D {
             this.debugFolder.add(this.params, "nBubbles", 3, 50).onFinishChange(() => {
                 this.generateBubbles()
             })
+            this.debugFolder.add(this.params, "gStrength", 0, 400).name("Force gravité")// .onChange(() => {
+                // if (!!this.bubbles) {
+                //     this.bubbles.forEach(b => {
+                //         b.gx = randomRange(-this.params.gStrength, this.params.gStrength)
+                //         b.gy = randomRange(-this.params.gStrength, this.params.gStrength)
+                //     })
+                // }
+                // })
         }
 
         /** device orientation */
@@ -153,8 +162,8 @@ export default class SceneBouncingBubbles extends Scene2D {
 
         if (!!this.bubbles) {
             this.bubbles.forEach(b => {
-                b.gx = gx_ * this.params.speed
-                b.gy = gy_ * this.params.speed
+                b.gx = gx_ * this.params.gStrength
+                b.gy = gy_ * this.params.gStrength
             })
         }
         this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
