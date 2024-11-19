@@ -138,11 +138,11 @@ export default class SceneBouncingBubbles extends Scene2D {
     }
 
     onDeviceOrientation() {
-        // update bubbles direction with orientation
+        // update bubbles direction with orientation but keeping the same speed
         if (!!this.bubbles) {
             this.bubbles.forEach(b => {
-                b.vx = b.vx * (this.orientation.gamma / 90)
-                b.vy = b.vy * (this.orientation.beta / 90)
+                b.vx = this.orientation.gamma * this.params.speed
+                b.vy = this.orientation.beta * this.params.speed
             })
         }
 
