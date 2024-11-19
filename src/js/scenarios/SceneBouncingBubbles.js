@@ -38,10 +38,21 @@ class Bubble {
         // if (this.y < 0 || this.y > height) this.vy *= -1
 
         /** bounce corrected */
-        this.vx = this.x < this.radius ? Math.abs(this.vx) : this.vx
-        this.vx = this.x > width - this.radius ? -Math.abs(this.vx) : this.vx
-        this.vy = this.y < this.radius ? Math.abs(this.vy) : this.vy
-        this.vy = this.y > height - this.radius ? -Math.abs(this.vy) : this.vy
+        if (this.x < this.radius) {
+            this.vx = Math.abs(this.vx)
+            this.gx = 0
+        } else if (this.x > width - this.radius) {
+            this.vx = -Math.abs(this.vx)
+            this.gx = 0
+        }
+
+        if (this.y < this.radius) {
+            this.vy = Math.abs(this.vy)
+            this.gy = 0
+        } else if (this.y > height - this.radius) {
+            this.vy = -Math.abs(this.vy)
+            this.gy = 0
+        }
     }
 }
 
@@ -55,7 +66,7 @@ export default class SceneBouncingBubbles extends Scene2D {
             threshold: 50,
             radius: 5,
             nBubbles: 10,
-            gStrength: 100
+            gStrength: 50
         }
         if (!!this.debugFolder) {
             this.debugFolder.add(this.params, "threshold", 0, 200)
