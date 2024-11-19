@@ -14,6 +14,11 @@ class Bubble {
         /** speed */
         this.vx = randomRange(-200, 200)
         this.vy = randomRange(-200, 200)
+
+        /** gravity */
+        this.gx = 0
+        this.gy = 0
+
     }
 
     draw() {
@@ -25,8 +30,8 @@ class Bubble {
     }
 
     update(width, height) {
-        this.x += this.vx * this.time.delta / 1000
-        this.y += this.vy * this.time.delta / 1000
+        this.x += this.vx * this.time.delta / 1000 - this.gx
+        this.y += this.vy * this.time.delta / 1000 + this.gy
 
         /** bounce */
         // if (this.x < 0 || this.x > width) this.vx *= -1
@@ -138,14 +143,13 @@ export default class SceneBouncingBubbles extends Scene2D {
     }
 
     onDeviceOrientation() {
-        // update bubbles direction with orientation but keeping the same speed
+
         if (!!this.bubbles) {
             this.bubbles.forEach(b => {
-                b.vx = this.orientation.gamma * this.params.speed
-                b.vy = this.orientation.beta * this.params.speed
+                b.gx = this.orientation.beta
+                b.gy = this.orientation.gamma
             })
         }
-
         this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
     }
 }
