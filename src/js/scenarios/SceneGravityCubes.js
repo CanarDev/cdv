@@ -96,7 +96,8 @@ export default class SceneGravityCubes extends Scene3D {
         /** Gravity cube */
         this.cubes = [];
         for (let i = 0; i < 10; i++) {
-            const cube_ = new GravityCube(50, 'lightblue');
+            const colors = ['blue', 'green', 'pink', 'yellow', 'orange', 'purple', 'red'];
+            const cube_ = new GravityCube(50, colors[Math.floor(Math.random() * colors.length)]);
             const x_ = randomRange(-this.width / 2, this.width / 2);
             const y_ = randomRange(-this.height / 2, this.height / 2);
             cube_.setPosition(x_, y_);
