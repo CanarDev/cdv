@@ -173,6 +173,8 @@ export default class SceneBouncingBubbles extends Scene2D {
                 b.gy = gy_ * this.params.gStrength
             })
         }
-        this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
+        if (!!!this.debug) {
+            this.debug.domDebug = ('alpha : ' + this.orientation.alpha.toFixed(2) + ' -|- beta : ' + this.orientation.beta.toFixed(2) + ' -|- gamma : ' + this.orientation.gamma.toFixed(2))
+        }
     }
 }
