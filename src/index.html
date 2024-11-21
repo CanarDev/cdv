@@ -10,8 +10,16 @@
 
 <body>
     <div class="container">
-    <h1>Creative Web</h1>
-        <canvas id="canvas-scene" width="400" height="400" class="scene"></canvas>
+        <h1>Creative Web</h1>
+
+        <div>
+            <button id="btn-access">Allow sensors</button>
+            <p id="debug"></p>
+        </div>
+
+        <canvas id="canvas-scene-1" class="scene"></canvas>
+        <canvas id="canvas-scene-2" class="scene"></canvas>
+        <canvas id="canvas-scene-3" class="scene"></canvas>
     </div>
     <script type="module" src="./main.js"></script>
 </body>
@@ -19,6 +27,7 @@
 <style>
     body {
         background-color: black;
+        height: 300vh;
     }
 
     button {
@@ -64,7 +73,7 @@
 
     .scene {
         border: solid white;
-        width: 50%;
+        width: 100%;
         height: 50vh;
     }
 </style>
