@@ -59,10 +59,18 @@ export default class SceneBouncingBubbles extends Scene2D {
             speed: 1, // positif ou negatif
             threshold: 50,
             radius: 5,
-            nBubbles: 3,
+            nBubbles: 6,
             gStrength: 300
         }
         if (!!this.debugFolder) {
+            this.debugFolder.add(this.params, "speed", -100, 100).onChange(() => {
+                if (!!this.bubbles) {
+                    this.bubbles.forEach(b => {
+                        b.vx = this.params.speed
+                        b.vy = this.params.speed
+                    })
+                }
+            })
             this.debugFolder.add(this.params, "threshold", 0, 200)
             this.debugFolder.add(this.params, "radius", 0, 30, 0.1).name("Rayon").onChange(() => {
                 if (!!this.bubbles) {

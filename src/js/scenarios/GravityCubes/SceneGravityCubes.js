@@ -14,11 +14,15 @@ export default class SceneGravityCubes extends Scene3D {
 
         /** debug */
         this.params = {
-            gScale: 1
+            gScale: 1,
+            cubeSize: 30
         }
         if(!!this.debugFolder) {
             this.debugFolder.add(this.params, "gScale", 0.5, 10, 0.1).onChange(() => {
                 if(!!this.engine) this.engine.gravity.scale *= this.params.gScale
+            })
+            this.debugFolder.add(this.params, "cubeSize", 20, 40, 1).onChange(() => {
+                if (!!this.cubes) this.cubes.forEach(c => { c.setSize(this.params.cubeSize) })
             })
         }
 
@@ -33,8 +37,8 @@ export default class SceneGravityCubes extends Scene3D {
         this.wallRight = new Wall('blue')
         this.wallLeft = new Wall('blue')
 
-        this.wallPlatformOne = new Wall('red')
-        this.wallPlatformTwo = new Wall('red')
+        this.wallPlatformOne = new Wall('white')
+        this.wallPlatformTwo = new Wall('white')
 
         // this.wallBottom = new Wall('red')
         this.add(this.wallRight)
@@ -48,7 +52,7 @@ export default class SceneGravityCubes extends Scene3D {
         this.cubes = []
         const colors = ['red', 'yellow', 'blue']
         for(let i=0; i < 10; i++) {
-            const cube_ = new GravityCube(50, colors[i % colors.length])
+            const cube_ = new GravityCube(this.params.cubeSize, colors[i % colors.length])
             const x_ = randomRange( -this.width / 2, this.width / 2 )
             const y_ = randomRange( -this.height / 2, this.height / 2 )
             cube_.setPosition(x_, y_)
@@ -96,7 +100,7 @@ export default class SceneGravityCubes extends Scene3D {
     }
 
     addCube(x, y) {
-        const newCube_ = new GravityCube(50)
+        const newCube_ = new GravityCube(this.params.cubeSize)
         newCube_.setPosition(x, y)
         this.add(newCube_)
         this.cubes.push(newCube_)
@@ -125,17 +129,17 @@ export default class SceneGravityCubes extends Scene3D {
         this.camera.bottom = -this.height / 2
 
         if (!!this.wallRight) {
-            this.wallRight.setPosition(this.width / 2, 0)
+            this.wallRight.setPosition(this.width / 2 + THICKNESS, 0)
             this.wallRight.setSize(THICKNESS, this.height)
 
-            this.wallLeft.setPosition(-this.width / 2, 0)
+            this.wallLeft.setPosition(-this.width / 2 - THICKNESS, 0)
             this.wallLeft.setSize(THICKNESS, this.height)
 
-            this.wallPlatformOne.setPosition(-this.width / 12, this.height / 8)
-            this.wallPlatformOne.setSize(this.width / 1.2 -THICKNESS, THICKNESS)
+            this.wallPlatformOne.setPosition(-this.width / 7, this.height / 6)
+            this.wallPlatformOne.setSize(this.width / 1.4, THICKNESS)
 
-            this.wallPlatformTwo.setPosition(this.width / 12, -this.height / 8)
-            this.wallPlatformTwo.setSize(this.width / 1.2 -THICKNESS, THICKNESS)
+            this.wallPlatformTwo.setPosition(this.width / 7, -this.height / 6)
+            this.wallPlatformTwo.setSize(this.width / 1.4, THICKNESS)
 
             // this.wallBottom.setPosition(0, -this.height / 2)
             // this.wallBottom.setSize(this.width - THICKNESS, THICKNESS)

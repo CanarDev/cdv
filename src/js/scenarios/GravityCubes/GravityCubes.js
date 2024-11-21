@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { Bodies, Body } from 'matter-js'
 
 export default class GravityCube extends THREE.Mesh {
@@ -13,6 +14,7 @@ export default class GravityCube extends THREE.Mesh {
         this.body = Bodies.rectangle(
             0, 0, size, size
         )
+
     }
 
     setPosition(x, y) {
