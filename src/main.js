@@ -7,8 +7,8 @@ import { askMotionAccess } from "./js/Utils/DeviceAccess"
 /** TODO */
 /*
     - SceneGravityCubes
-        - Mur gauche (responsive)
-        - Murs intermédiaires (responsive)
+        // - Mur gauche (responsive)
+        // - Murs intermédiaires (responsive)
         - Fonction AddCube()
     - SceneBouncingBubbles
         - Fonction RemoveBubble()
@@ -51,12 +51,18 @@ const update = () => {
     btn.style.transform = `scale(${scale_}, ${1})`
 
     /** bubbles + cube scan = is IN or OUT ? */
+    const outScene2_up = scene2.cubes.filter(c => { return c.position.y > scene2.height / 2 })
     const outScene2_down = scene2.cubes.filter(c => { return c.position.y < -scene2.height / 2 })
 
     /** remove entities (cube + bubble) OUT of their own scene */
+    outScene2_up.forEach(cubeToRemove => { scene2.removeCube(cubeToRemove) })
     outScene2_down.forEach(cubeToRemove => { scene2.removeCube(cubeToRemove) })
 
     /** add new entities to corresponding scene, ex: bulle scene 1 -> cube scene 2 */
+    outScene2_up.forEach(cubeToMove => {
+        const newBubble_ = scene1.addBubble(cubeToMove.position.x + scene1.width / 2, scene1.height)
+        newBubble_.vy = -Math.abs(newBubble_.vy)
+    })
     outScene2_down.forEach(cubeToMove => {
         const newBubble_ = scene3.addBubble(cubeToMove.position.x + scene3.width / 2, 0)
         newBubble_.vy = Math.abs(newBubble_.vy)

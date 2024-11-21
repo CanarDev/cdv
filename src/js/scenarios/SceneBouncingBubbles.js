@@ -101,6 +101,13 @@ export default class SceneBouncingBubbles extends Scene2D {
         return bubble_
     }
 
+    removeBubble(bubble) {
+        const index_ = this.bubbles.indexOf(bubble)
+        if (index_ > -1) {
+            this.bubbles.splice(index_, 1)
+        }
+    }
+
     draw() {
         /** style */
         this.context.strokeStyle = "white"

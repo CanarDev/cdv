@@ -17,6 +17,7 @@
   "author": "Adrien Husson",
   "license": "MIT",
   "dependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "dat.gui": "^0.7.9",
     "matter-js": "^0.20.0",
     "three": "^0.170.0",
