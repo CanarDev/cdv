@@ -2,7 +2,7 @@ import Scene3D from "../Scene3D";
 import * as THREE from "three";
 import {OrthographicCamera} from "three";
 import {Bodies, Engine, Runner, Composite, Body} from "matter-js";
-import {randomRange} from "../Utils/MathUtils";
+import {clamp, randomRange} from "../Utils/MathUtils";
 
 const THICKNESS = 15;
 
@@ -125,6 +125,9 @@ export default class SceneGravityCubes extends Scene3D {
         this.runner = Runner.create();
         Runner.run(this.runner, this.engine);
 
+        /** device orientation */
+        this.globalContext.useDeviceOrientation = true
+        this.orientation = this.globalContext.orientation
 
         this.resize();
     }
@@ -164,5 +167,23 @@ export default class SceneGravityCubes extends Scene3D {
             this.wallLeft.setSize(THICKNESS, this.height);
         }
 
+    }
+    onDeviceOrientation() {
+        let gx_ = this.globalContext.orientation.gamma;
+        let gy_ = this.globalContext.orientation.beta;
+
+        gx_ = clamp(gx_, -1, 1);
+        gy_ = clamp(gy_, -1, 1)
+
+        let coordinates = ""
+        coordinates.concat(
+            gx_.toFixed(2),
+            " -|- ",
+            gy_.toFixed(2)
+        )
+        this.debug.domDebug = coordinates;
+
+        this.engine.gravity.x = gx_
+        this.engine.gravity.y = gy_
     }
 }
