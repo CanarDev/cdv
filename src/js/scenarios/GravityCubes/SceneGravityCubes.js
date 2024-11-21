@@ -95,10 +95,15 @@ export default class SceneGravityCubes extends Scene3D {
         this.cubes = this.cubes.filter(c => { return c !== cube })
     }
 
-    addCube(cube) {
-        this.add(cube)
-        this.cubes.push(cube)
-        Composite.add(this.engine.world, cube.body)
+    addCube(x, y) {
+        const newCube_ = new GravityCube(50)
+        newCube_.setPosition(x, y)
+        this.add(newCube_)
+        this.cubes.push(newCube_)
+
+        Composite.add(this.engine.world, newCube_.body)
+
+        return newCube_
     }
 
     update() {

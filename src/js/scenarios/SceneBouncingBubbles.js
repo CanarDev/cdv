@@ -96,7 +96,7 @@ export default class SceneBouncingBubbles extends Scene2D {
     }
 
     addBubble(x, y) {
-        const bubble_ = new Bubble(this.context, x, y, this.params.radius )
+        const bubble_ = new Bubble(this.context, x, y, 5)
         this.bubbles.push(bubble_)
         return bubble_
     }
