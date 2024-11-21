@@ -3,6 +3,28 @@ import SceneBouncingBubbles from "./js/scenarios/SceneBouncingBubbles"
 import GlobalContext from "./js/template/GlobalContext"
 import { askMotionAccess } from "./js/Utils/DeviceAccess"
 
+/** TODO */
+/** TODO */
+/*
+    - SceneGravityCubes
+        - Mur gauche (responsive)
+        - Murs intermédiaires (responsive)
+        - Fonction AddCube()
+    - SceneBouncingBubbles
+        - Fonction RemoveBubble()
+        - Debug : paramètre speed (-1 <-> 1)
+    - Main
+        - Finir les correspondances
+            scène 2 -> 3 (faite en cours)
+            3 -> 2
+            3 -> 1
+            1 -> 3
+            1 -> 2
+            2 -> 1
+*/
+/** TODO */
+/** TODO */
+
 /** motion sensors authorization */
 const btn = document.getElementById("btn-access")
 btn.addEventListener("click", function () {
@@ -48,6 +70,10 @@ const update = () => {
     // })
 }
 time.on("update", update)
+
+
+
+
 
 /*
 Hello, j'ai trouver comment utiliser le motion capteur en mode dev sans deploy sur vercel :

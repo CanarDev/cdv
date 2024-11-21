@@ -6,7 +6,7 @@ import GravityCube from './GravityCubes'
 import Wall from './Wall'
 import { clamp } from 'three/src/math/MathUtils.js'
 
-const THICKNESS = 20
+const THICKNESS = 10
 
 export default class SceneGravityCubes extends Scene3D {
     constructor(id) {
@@ -31,8 +31,17 @@ export default class SceneGravityCubes extends Scene3D {
 
         /** walls */
         this.wallRight = new Wall('blue')
-        this.wallBottom = new Wall('red')
+        this.wallLeft = new Wall('blue')
+
+        this.wallPlatformOne = new Wall('red')
+        this.wallPlatformTwo = new Wall('red')
+
+        // this.wallBottom = new Wall('red')
         this.add(this.wallRight)
+        this.add(this.wallLeft)
+
+        this.add(this.wallPlatformOne)
+        this.add(this.wallPlatformTwo)
         // this.add(this.wallBottom)
 
         /** cube */
@@ -51,9 +60,13 @@ export default class SceneGravityCubes extends Scene3D {
         /** matter js */
         this.engine = Engine.create({ render: { visible: false } })
         this.engine.gravity.scale *= this.params.gScale
-        console.log(this.engine.gravity)
         this.bodies = [
             this.wallRight.body,
+            this.wallLeft.body,
+
+            this.wallPlatformOne.body,
+            this.wallPlatformTwo.body,
+
             // this.wallBottom.body,
             ...this.cubes.map(c => c.body)
         ]
@@ -104,8 +117,17 @@ export default class SceneGravityCubes extends Scene3D {
             this.wallRight.setPosition(this.width / 2, 0)
             this.wallRight.setSize(THICKNESS, this.height)
 
-            this.wallBottom.setPosition(0, -this.height / 2)
-            this.wallBottom.setSize(this.width - THICKNESS, THICKNESS)
+            this.wallLeft.setPosition(-this.width / 2, 0)
+            this.wallLeft.setSize(THICKNESS, this.height)
+
+            this.wallPlatformOne.setPosition(-this.width / 12, this.height / 8)
+            this.wallPlatformOne.setSize(this.width / 1.2 -THICKNESS, THICKNESS)
+
+            this.wallPlatformTwo.setPosition(this.width / 12, -this.height / 8)
+            this.wallPlatformTwo.setSize(this.width / 1.2 -THICKNESS, THICKNESS)
+
+            // this.wallBottom.setPosition(0, -this.height / 2)
+            // this.wallBottom.setSize(this.width - THICKNESS, THICKNESS)
         }
     }
 
